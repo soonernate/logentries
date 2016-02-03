@@ -173,7 +173,7 @@
             ],
             "action": {
                 "type": "Alert",
-                "min_matches_count": 0,
+                "min_matches_count": 5,
                 "min_report_count": 100,
                 "min_report_period": "Hour",
                 "min_matches_period": "Hour"
