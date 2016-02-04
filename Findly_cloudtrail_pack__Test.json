@@ -6,7 +6,7 @@
             "description": "AWS Security Group Add or Deleted Detected",
             "labels": [
                 {
-                    "name": "AWS Security",
+                    "name": "AWS SG Add or Delete",
                     "color": "c90707"
                 }
             ],
@@ -16,7 +16,7 @@
             ],
             "action": {
                 "type": "Alert",
-                "min_matches_count": 1,
+                "min_matches_count": 0,
                 "min_report_count": 1,
                 "min_matches_period": "Hour",
                 "min_report_period": "Hour"
