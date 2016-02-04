@@ -74,7 +74,7 @@
             "description": "AWS User Create or Deleted Detected",
             "labels": [
                 {
-                    "name": "AWS Root Login",
+                    "name": "AWS User Add Delete",
                     "color": "ff9305"
                 }
             ],
