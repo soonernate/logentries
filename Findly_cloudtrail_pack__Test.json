@@ -97,7 +97,7 @@
             "description": "AWS Group Add or Delete",
             "labels": [
                 {
-                    "name": "AWS Group",
+                    "name": "AWS Group Add Delete",
                     "color": "ff9305"
                 }
             ],
@@ -161,7 +161,7 @@
             "description": "AWS Security Group Has Been Changed",
             "labels": [
                 {
-                    "name": "AWS Security Group Change",
+                    "name": "AWS SG Change",
                     "color": "c90707"
                 }
             ],
