@@ -178,6 +178,27 @@
                 "min_report_period": "Hour",
                 "min_matches_period": "Hour"
             }
+        },
+         {
+            "type": "Alert",
+            "name": "AWS Login No MFA",
+            "description": "AWS Login without MFA Detected",
+            "labels": [
+                {
+                    "name": "AWS Login No MFA",
+                    "color": "c90707"
+                }
+            ],
+            "patterns": [
+                "eventName=ConsoleLogin AND MFAUsed=No"
+            ],
+            "action": {
+                "type": "Alert",
+                "min_matches_count": 0,
+                "min_report_count": 100,
+                "min_report_period": "Hour",
+                "min_matches_period": "Hour"
+            }
         }
     ]
 }
