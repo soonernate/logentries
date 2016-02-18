@@ -1,0 +1,253 @@
+{
+    "tags": [
+        {
+            "type": "Alert",
+            "name": "AWS SG Add or Delete",
+            "description": "AWS Security Group Add or Deleted Detected",
+            "labels": [
+                {
+                    "name": "AWS SG Add or Delete",
+                    "color": "c90707"
+                }
+            ],
+            "patterns": [
+                "CreateSecurityGroup",
+                "DeleteSecurityGroup"
+            ],
+            "action": {
+                "type": "Alert",
+                "min_matches_count": 0,
+                "min_report_count": 100,
+                "min_matches_period": "Hour",
+                "min_report_period": "Hour"
+            }
+        },
+        {
+            "type": "Alert",
+            "name": "AWS EC2 Instance Actions",
+            "description": "AWS EC2 Instance Actions",
+            "labels": [
+                {
+                    "name": "AWS EC2",
+                    "color": "00dd2f"
+                }
+            ],
+            "patterns": [
+                "RebootInstances",
+                "StartInstances",
+                "StopInstances",
+                "TerminateInstances"
+            ],
+            "action": {
+                "type": "Alert",
+                "min_matches_count": 0,
+                "min_report_count": 100,
+                "min_matches_period": "Hour",
+                "min_report_period": "Hour"
+            }
+        },
+        {
+            "type": "Alert",
+            "name": "AWS Policy Change",
+            "description": "AWS Policy Actions",
+            "labels": [
+                {
+                    "name": "AWS Policy",
+                    "color": "c90707"
+                }
+            ],
+            "patterns": [
+                "PutRolePolicy",
+                "PutUserPolicy"
+            ],
+            "action": {
+                "type": "Alert",
+                "min_matches_count": 0,
+                "min_report_count": 100,
+                "min_matches_period": "Hour",
+                "min_report_period": "Hour"
+            }
+        },
+        {
+            "type": "Alert",
+            "name": "AWS User Add or Delete",
+            "description": "AWS User Create or Deleted Detected",
+            "labels": [
+                {
+                    "name": "AWS User Add Delete",
+                    "color": "ff9305"
+                }
+            ],
+            "patterns": [
+                "CreateUser",
+                "CreateUserProfile",
+                "DeleteUser"
+            ],
+            "action": {
+                "type": "Alert",
+                "min_matches_count": 0,
+                "min_report_count": 100,
+                "min_matches_period": "Hour",
+                "min_report_period": "Hour"
+            }
+        },
+        {
+            "type": "Alert",
+            "name": "AWS Group Add or Delete",
+            "description": "AWS Group Add or Delete",
+            "labels": [
+                {
+                    "name": "AWS Group Add Delete",
+                    "color": "ff9305"
+                }
+            ],
+            "patterns": [
+                "CreateGroup",
+                "DeleteGroup"
+            ],
+            "action": {
+                "type": "Alert",
+                "min_matches_count": 0,
+                "min_report_count": 100,
+                "min_matches_period": "Hour",
+                "min_report_period": "Hour"
+            }
+        },
+        {
+            "type": "Alert",
+            "name": "AWS PWD Update",
+            "description": "AWS PWD Update",
+            "labels": [
+                {
+                    "name": "AWS PWD Update",
+                    "color": "ff9305"
+                }
+            ],
+            "patterns": [
+                "UpdateAccountPasswordPolicy"
+            ],
+            "action": {
+                "type": "Alert",
+                "min_matches_count": 0,
+                "min_report_count": 100,
+                "min_matches_period": "Hour",
+                "min_report_period": "Hour"
+            }
+        },
+        {
+            "type": "Alert",
+            "name": "AWS Root Login",
+            "description": "AWS Root Login Detected",
+            "labels": [
+                {
+                    "name": "AWS Root Login",
+                    "color": "c90707"
+                }
+            ],
+            "patterns": [
+                "eventName=ConsoleLogin AND type=Root"
+            ],
+            "action": {
+                "type": "Alert",
+                "min_matches_count": 0,
+                "min_report_count": 100,
+                "min_report_period": "Hour",
+                "min_matches_period": "Hour"
+            }
+        },
+        {
+            "type": "Alert",
+            "name": "AWS SG Change",
+            "description": "AWS Security Group Has Been Changed",
+            "labels": [
+                {
+                    "name": "AWS SG Change",
+                    "color": "c90707"
+                }
+            ],
+            "patterns": [
+                "AuthorizeSecurityGroupIngress",
+                "AuthorizeSecurityGroupEgress",
+                "RevokeSecurityGroupIngress",
+                "RevokeSecurityGroupEgress"
+            ],
+            "action": {
+                "type": "Alert",
+                "min_matches_count": 0,
+                "min_report_count": 100,
+                "min_report_period": "Hour",
+                "min_matches_period": "Hour"
+            }
+        },
+         {
+            "type": "Alert",
+            "name": "AWS Login No MFA",
+            "description": "AWS Login without MFA Detected",
+            "labels": [
+                {
+                    "name": "AWS Login No MFA",
+                    "color": "c90707"
+                }
+            ],
+            "patterns": [
+                "eventName=ConsoleLogin AND MFAUsed=No"
+            ],
+            "action": {
+                "type": "Alert",
+                "min_matches_count": 0,
+                "min_report_count": 100,
+                "min_report_period": "Hour",
+                "min_matches_period": "Hour"
+            }
+        }
+    ],
+    "searches": [
+        {
+            "name": "startinstances",
+            "query": "where(StartInstances) calculate(COUNT)"
+        },
+        {
+            "name": "stopinstances",
+            "query": "where(StopInstances) calculate(COUNT)"
+        },
+        {
+            "name": "event_type_breakdown",
+            "query": "where(eventName) groupby(eventName) calculate(COUNT)"
+        },
+        {
+            "name": "event_type_by_iamuser",
+            "query": "where(eventName AND IAMUser) groupby(eventName) calculate(COUNT)"
+        },
+        {
+            "name": "event_count_by_iamuser",
+            "query": "where(eventName AND IAMUser) groupby(userName) calculate(COUNT)"
+        }
+    ],
+    "widgets": [
+        {
+            "name": "Event Type Breakdown",
+            "search_name": "event_type_breakdown",
+            "type": "BarChart"
+        },
+        {
+            "name": "Event Type Breakdown By IAMUser",
+            "search_name": "event_type_by_iamuser",
+            "type": "BarChart"
+        },
+        {
+            "name": "Event Count Breakdown By IAMUser",
+            "search_name": "event_count_by_iamuser",
+            "type": "BarChart"
+        },
+        {
+            "name": "Number of Instance Stops",
+            "search_name": "stopinstances",
+            "type": "Count"
+        },
+        {
+            "name": "Number of Instance Starts",
+            "search_name": "startinstances",
+            "type": "Count"
+        }
+    ]
+}
